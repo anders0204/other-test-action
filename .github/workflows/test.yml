@@ -40,20 +40,20 @@ jobs:
           coverage-gist-token: ${{ secrets.GIST_TOKEN }}
           coverage-gist-id: ${{ secrets.GIST_ID }}
 
-  # deploy:
-  #   needs: build
+  deploy:
+    needs: build
 
-  #   permissions:
-  #     pages: write
-  #     id-token: write
+    permissions:
+      pages: write
+      id-token: write
 
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-  #   runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v4
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
