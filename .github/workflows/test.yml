@@ -40,6 +40,18 @@ jobs:
           coverage-gist-token: ${{ secrets.GIST_TOKEN }}
           coverage-gist-id: ${{ secrets.GIST_ID }}
 
+      - name: Fix permissions for htmlcov
+        run: |
+          chmod -c -R +rX "htmlcov" | while read line; do
+              echo "::warning title=Invalid file permissions automatically fixed::$line"
+          done
+
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages
+          path: htmlcov
+
   deploy:
     needs: build
 
